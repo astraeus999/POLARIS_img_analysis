@@ -37,9 +37,11 @@ pip install numpy astropy matplotlib opencv-python imageio tensorflow torch scik
 
 The project utilizes a PyTorch-based Variational Autoencoder (VAE) to reconstruct clean versions of images by learning from control regions (ring masks) and predicting noisy or masked regions. The model construction is in [`astro_vae_package/vae_model.py`](https://github.com/astraeus999/POLARIS_img_analysis/blob/main/VaeImputation/astro_vae_package/vae_model.py)
 
-## Visualization
+## Result
 
-Output plots and intermediate steps are visualized using Matplotlib and saved as images or PDF files.
+We applied the VAE model on HD_129590 system to filter out the background star then get a purified exoplanetary disks.
+
+![final_result](images/final_result.png)
 
 ## Notes
 
