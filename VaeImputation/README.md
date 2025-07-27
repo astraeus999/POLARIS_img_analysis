@@ -24,9 +24,13 @@ pip install numpy astropy matplotlib opencv-python imageio tensorflow torch scik
 2. Open [`Astro_VAE_Modeling_V1.ipynb`]((https://github.com/astraeus999/POLARIS_img_analysis/blob/main/VaeImputation/Astro_VAE_Modeling_V1.ipynb)).
 3. Execute the cells in order to:
    - Load FITS data
+   
    ![data](images/exoplanetary_disks.png)
+   
    - Apply spatial masks
+   
    ![masks](images/masks.png)
+   
    - Train and evaluate the VAE model
 
 ## Model Overview
