@@ -1,0 +1,19 @@
+name: diff-simclr
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pytorch>=1.8.0
+  - torchvision
+  - cudatoolkit=11.3 
+  - numpy
+  - pillow
+  - matplotlib
+  - scikit-learn
+  - scipy
+  - pip
+  - pip:
+    - tensorboard
+    - apex  # Optional: for mixed precision training

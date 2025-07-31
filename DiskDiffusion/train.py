@@ -17,26 +17,6 @@ import os
 import math
 import argparse
 
-# def create_mnist_dataloaders(batch_size,image_size=28,num_workers=4):
-    
-#     preprocess=transforms.Compose([transforms.Resize(image_size),\
-#                                     transforms.ToTensor(),\
-#                                     transforms.Normalize([0.5],[0.5])]) #[0,1] to [-1,1]
-
-#     train_dataset=MNIST(root="./labeled_images",\
-#                         train=True,\
-#                         download=False,\
-#                         transform=preprocess
-#                         )
-#     test_dataset=MNIST(root="./labeled_images_small",\
-#                         train=False,\
-#                         download=True,\
-#                         transform=preprocess
-#                         )
-
-#     return DataLoader(train_dataset,batch_size=batch_size,shuffle=True,num_workers=num_workers),\
-#             DataLoader(test_dataset,batch_size=batch_size,shuffle=True,num_workers=num_workers)
-
 
 
 class UnsupervisedImageDataset(Dataset):
@@ -55,14 +35,38 @@ class UnsupervisedImageDataset(Dataset):
             image = self.transform(image)
         return image, os.path.basename(img_path)
 
-def create_custom_dataloaders(batch_size, image_size=256, num_workers=4):
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Training MNISTDiffusion")
+    parser.add_argument('--lr', type=float, default=0.001)
+    parser.add_argument('--batch_size', type=int, default=16)
+    parser.add_argument('--image_size', type=int, default=256)
+    parser.add_argument('--epochs', type=int, default=1000)
+    parser.add_argument('--ckpt', type=str, help='define checkpoint path', default='')
+    parser.add_argument('--n_samples', type=int, help='define sampling amounts after every epoch trained', default=1)
+    parser.add_argument('--model_base_dim', type=int, help='base dim of Unet', default=4)
+    parser.add_argument('--timesteps', type=int, help='sampling steps of DDPM', default=500)
+    parser.add_argument('--model_ema_steps', type=int, help='ema model evaluation interval', default=10)
+    parser.add_argument('--model_ema_decay', type=float, help='ema model decay', default=0.995)
+    parser.add_argument('--log_freq', type=int, help='training log message printing frequency', default=10)
+    parser.add_argument('--no_clip', action='store_true', help='set to normal sampling method without clip x_0 which could yield unstable samples')
+    parser.add_argument('--cpu', action='store_true', help='cpu training')
+
+    parser.add_argument('--train_data_path', type=str, default='./images', help='Path to training image folder')
+    parser.add_argument('--test_data_path', type=str, default='./dataset/test', help='Path to test image folder')
+
+    return parser.parse_args()
+
+
+
+def create_custom_dataloaders(batch_size, image_size=256, num_workers=4, train_path="./images", test_path="./dataset/test"):
     preprocess = transforms.Compose([
-        transforms.Resize((image_size, image_size)),  # Resize to the desired image size
+        transforms.Resize((image_size, image_size)),
         transforms.ToTensor(),
     ])
 
-    train_dataset = UnsupervisedImageDataset(root="./images", transform=preprocess)
-    test_dataset = UnsupervisedImageDataset(root="./dataset/test", transform=preprocess)
+    train_dataset = UnsupervisedImageDataset(root=train_path, transform=preprocess)
+    test_dataset = UnsupervisedImageDataset(root=test_path, transform=preprocess)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
@@ -70,25 +74,6 @@ def create_custom_dataloaders(batch_size, image_size=256, num_workers=4):
     return train_loader, test_loader
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(description="Training MNISTDiffusion")
-    parser.add_argument('--lr',type = float ,default=0.001)
-    parser.add_argument('--batch_size',type = int ,default=16)
-    parser.add_argument('--image_size',type = int,default=256)
-    parser.add_argument('--epochs',type = int,default=1000)
-    parser.add_argument('--ckpt',type = str,help = 'define checkpoint path',default='')
-    parser.add_argument('--n_samples',type = int,help = 'define sampling amounts after every epoch trained',default=1)
-    parser.add_argument('--model_base_dim',type = int,help = 'base dim of Unet',default=4)
-    parser.add_argument('--timesteps',type = int,help = 'sampling steps of DDPM',default=500)
-    parser.add_argument('--model_ema_steps',type = int,help = 'ema model evaluation interval',default=10)
-    parser.add_argument('--model_ema_decay',type = float,help = 'ema model decay',default=0.995)
-    parser.add_argument('--log_freq',type = int,help = 'training log message printing frequence',default=10)
-    parser.add_argument('--no_clip',action='store_true',help = 'set to normal sampling method without clip x_0 which could yield unstable samples')
-    parser.add_argument('--cpu',action='store_true',help = 'cpu training')
-
-    args = parser.parse_args()
-
-    return args
 
 
 def main(args):

@@ -1,0 +1,1 @@
+python main_supcon_old.py --model resnet18 --epochs 200 --dataset path 

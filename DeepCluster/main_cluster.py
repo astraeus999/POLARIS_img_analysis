@@ -42,8 +42,8 @@ def getdataset(batch_size, image_size=256, num_workers=4):
         transforms.ToTensor(),
     ])
 
-    train_dataset = UnsupervisedImageDataset(root="./images", transform=preprocess)
-    test_dataset = UnsupervisedImageDataset(root="./labeled_images", transform=preprocess)
+    train_dataset = UnsupervisedImageDataset(root="./labeled_images_example", transform=preprocess)
+    test_dataset = UnsupervisedImageDataset(root="./labeled_images_example", transform=preprocess)
     print(f"Number of training images: {len(train_dataset)}")
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)
@@ -63,12 +63,12 @@ def parse_args():
     parser.add_argument('--workers', default=4, type=int, help='number of data loading workers (default: 4)')
     parser.add_argument('--epochs', type=int, default=300, help='number of total epochs to run (default: 200)')
     parser.add_argument('--start_epoch', default=0, type=int, help='manual epoch number (useful on restarts) (default: 0)')
-    parser.add_argument('--batch', default=16, type=int, help='mini-batch size (default: 256)')
+    parser.add_argument('--batch', default=16, type=int, help='mini-batch size (default: 16)')
     parser.add_argument('--momentum', default=0.9, type=float, help='momentum (default: 0.9)')
     parser.add_argument('--resume', default='', type=str, metavar='PATH', help='path to checkpoint (default: None)')
     parser.add_argument('--checkpoints', type=int, default=500, help='iterations between two checkpoints (default: 25000)')
     parser.add_argument('--seed', type=int, default=31, help='random seed (default: 31)')
-    parser.add_argument('--exp', type=str, default='./ckpt/cluster_method_new_16', help='path to exp folder')
+    parser.add_argument('--exp', type=str, default='./ckpt', help='path to exp folder')
     parser.add_argument('--verbose', action='store_false', default=True, help='disable verbose mode (default: enabled)')
     return parser.parse_args()
 

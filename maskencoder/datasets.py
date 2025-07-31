@@ -29,8 +29,8 @@ def getdataset(batch_size, image_size=256, num_workers=4):
         transforms.ToTensor(),
     ])
 
-    train_dataset = UnsupervisedImageDataset(root="./images", transform=preprocess)
-    test_dataset = UnsupervisedImageDataset(root="./labeled_images", transform=preprocess)
+    train_dataset = UnsupervisedImageDataset(root="./labeled_images_example", transform=preprocess)
+    test_dataset = UnsupervisedImageDataset(root="./labeled_images_example", transform=preprocess)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers)

@@ -81,7 +81,7 @@ def parse_option():
 
     opt = parser.parse_args()
 
-        opt.data_folder = './images/'
+        opt.data_folder = './labeled_images_example/'
     opt.model_path = '/home/your_folder'
     opt.tb_path = '/home/your_folder'
 

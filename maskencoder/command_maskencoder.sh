@@ -1,1 +1,1 @@
-python main_cluster.py --epochs 300 
+python train.py --epochs 300 
