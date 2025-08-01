@@ -77,9 +77,9 @@ def test_model(checkpoint_path, test_images_path, output_dir, image_size=256, ba
 
 # Example usage
 test_model(
-    checkpoint_path="./results/new_results/steps_00030651.pt",
-    test_images_path="./labeled_images",  # Path to your test images
-    output_dir="./results/test_outputs_new_20451/labels",
+    checkpoint_path="./ckpt/steps_00040851.pt",
+    test_images_path="./labeled_images_example",  # Path to your test images
+    output_dir="./results",
     image_size=256,
     batch_size=4,
     device= torch.device("cuda:1") if torch.cuda.is_available() else "cpu"

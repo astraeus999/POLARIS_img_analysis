@@ -79,8 +79,8 @@ if __name__ == "__main__":
     checkpoint_path = "./ckpt/cluster_method_new/ckpt_epoch_200.pt"
 
     # Path to the folder containing test images
-    image_folder = "./labeled_images"
-    output_folder = "./downstream_tasks"
+    image_folder = "./labeled_images_example"
+    output_folder = "./results"
 
     # Define the image preprocessing pipeline
     transform = transforms.Compose([
