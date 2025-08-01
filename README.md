@@ -1,7 +1,9 @@
 # POLARIS_img_analysis
 
 A collection of polarimetric imaging analysis workflows and models aligned with POLARIS benchmark datasets.
+
 Find the paper at: https://arxiv.org/abs/2506.03511
+
 Find dataset at: https://zenodo.org/records/15493277
 
 ## 🚀 Overview
@@ -11,14 +13,34 @@ This repository provides a curated suite of image‑analysis approaches designed
 
 - **Diff-SimCLR** - our proposed latent-enhanced contrasive model for disk representation learning
 - **DiskDiffusion** - latent features learning and embedding process
-- **DeepCluster** - Upgraded to Python 3.11 From: [Paper]https://arxiv.org/abs/1807.05520
+- **DeepCluster** - Upgraded to Python 3.11 From: Deep Clustering for Unsupervised Learning of Visual Features [Paper](https://arxiv.org/abs/1807.05520)
 - **SimCLR** From: [1] Supervised Contrastive Learning. [Paper](https://arxiv.org/abs/2004.11362)  [2] A Simple Framework for Contrastive Learning of Visual Representations. [Paper](https://arxiv.org/abs/2002.05709)  
-- **MaskEncoder** From: [Paper]https://arxiv.org/abs/2111.06377
+- **MaskEncoder** From: Masked Autoencoders Are Scalable Vision Learners [Paper](https://arxiv.org/abs/2111.06377)
 
 Together, with VAE for center circustellar disk reconstruction:
 - **VaeImputation** - our VAE for validation of RDI quality obtained from Diff-SimCLR+downstream tasks
 
 Each offers a self-supervised or generative modeling strategy for representation learning.
+
+## Data Structure
+
+# A. Single-frame Polarimetric IRDAP-preprocessed Dataset
+
+- For Representation learning purpose.
+
+- `labeled_images_example/` contains a small sample of labeled polarimetric images for quick validation of workflows. The corresponding label is shown on their file name.
+
+![POLARIS Example](VaeImputation/assets/example_disk.png)
+
+# B.  Preprocessed exposure sequences for circumstellar disk reconstruction
+
+- For VAE imputation purpose.
+- It'a another version of #A., by which means the file names would match each other (target/reference name, observation date, etc.) for each exposure sequence.
+
+- `/VaeImputaion/I_tot_data_example/` contains a small sample of preprocessed exposure sequences for validation of VAE imputation workflow. The corresponding label is shown on their file name. The masked input are stored in our Zenodo repository: [Zenodo Record](https://zenodo.org/records/15493277).
+
+![POLARIS Example](image.png)
+
 
 ## 🧭 Repository Structure
 
@@ -61,6 +83,7 @@ POLARIS_img_analysis/
 │   └── Sample training images
 ├── README.md
 └── environment.yaml
+```
 
 ## ⚙️ Installation & Setup
 
