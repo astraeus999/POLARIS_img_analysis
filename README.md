@@ -30,7 +30,7 @@ Each offers a self-supervised or generative modeling strategy for representation
 
 - `labeled_images_example/` contains a small sample of labeled polarimetric images for quick validation of workflows. The corresponding label is shown on their file name.
 
-![POLARIS Example](VaeImputation/assets/example_disk.png)
+![POLARIS Example](image2.png)
 
 # B.  Preprocessed exposure sequences for circumstellar disk reconstruction
 
